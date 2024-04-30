@@ -1,0 +1,135 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /members:
+    post:
+      operationId: MembersController_create
+      summary: Create a new member
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMemberDto'
+      responses:
+        '201':
+          description: The member
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Member'
+      tags: &ref_0
+        - /members
+    get:
+      operationId: MembersController_findAll
+      summary: Get all members
+      parameters: []
+      responses:
+        '200':
+          description: The members
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Member'
+      tags: *ref_0
+  /members/{id}:
+    get:
+      operationId: MembersController_findOne
+      summary: Get a member by id
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The member
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Member'
+      tags: *ref_0
+    patch:
+      operationId: MembersController_update
+      summary: update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          example: 1
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMemberDto'
+      responses:
+        '200':
+          description: The member
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Member'
+      tags: *ref_0
+    delete:
+      operationId: MembersController_remove
+      summary: delete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          example: 1
+          schema:
+            type: number
+      responses:
+        '200':
+          description: The member
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Member'
+      tags: *ref_0
+info:
+  title: Members API docs
+  description: The members API description
+  version: '1.0'
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    CreateMemberDto:
+      type: object
+      properties: {}
+    Member:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: The id of the Member
+        name:
+          type: string
+          example: hogehoge
+          description: The name of the Member
+        age:
+          type: number
+          example: 25
+          description: The age of the Member
+      required:
+        - id
+        - name
+        - age
+    UpdateMemberDto:
+      type: object
+      properties: {}
